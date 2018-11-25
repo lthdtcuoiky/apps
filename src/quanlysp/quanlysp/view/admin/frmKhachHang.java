@@ -363,14 +363,14 @@ public class frmKhachHang extends javax.swing.JFrame {
         }
         DiaChi = txtDiaChi.getText();
         SDT = txtSDT.getText();
-        LoaiKhachHang =     Manager.frmTC.GetCbbSelected(cbbLoaiKhachHang);
+        LoaiKhachHang =     Manager.homePage.GetCbbSelected(cbbLoaiKhachHang);
         ChuThich = txtGhiChu.getText();
         String cautruyvan = "insert into KhachHang values("
         + " N'" + TenKhachHang + "' , '" + NgaySinh + "' ," + GioiTinh
         + ",N'" + DiaChi + "','" + SDT + "'," + LoaiKhachHang + ", N'" + ChuThich + "')";
         boolean kiemtra = KiemTraNhapKhachHang(0);
         if (kiemtra) {
-              Manager.connection.ExcuteQueryUpdateDB(cautruyvan);
+              Manager.connection.excuteQueryUpdate(cautruyvan);
             System.out.println("Đã Thêm Thành Công");
             System.out.println(cautruyvan);
             this.dispose();
@@ -378,8 +378,8 @@ public class frmKhachHang extends javax.swing.JFrame {
         } else {
             System.out.println("Thêm Thất Bại");
         }
-           Manager.frmTC.layDuLieuKhachHang();
-             Manager.frmTC.SetCbbKhachHangfrm(txtTenKhachHang.getText());
+           Manager.homePage.layDuLieuKhachHang();
+             Manager.homePage.SetCbbKhachHangfrm(txtTenKhachHang.getText());
     }//GEN-LAST:event_btnThem_ActionPerformed
 public boolean KiemTraNhapKhachHang(int ts) {
         String MaKhachHang, TenKhachHang, Ngaysinh, DiaChi, SDT;
@@ -417,7 +417,7 @@ public boolean KiemTraNhapKhachHang(int ts) {
             lblTenKhachHang_KhachHang.setForeground(Color.black);
         } else {
             kiemtra = false;
-            Manager.frmTC.ThongBao(ThongBao, "lỗi nhập liệu", 2);
+            Manager.homePage.ThongBao(ThongBao, "lỗi nhập liệu", 2);
         }
         return kiemtra;
     }
@@ -482,8 +482,8 @@ int tam=0;
 
     private void jPanel_KhachHangComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel_KhachHangComponentShown
         rbtnNam.setSelected(true);
-        Manager.frmTC.layDuLieuKhachHang();
-        cbbLoaiKhachHang.setModel(  Manager.frmTC.LayDuLieucbb("LoaiKhachHang", "TenLoaiKhachHang", "MaLoaiKhachHang"));
+        Manager.homePage.layDuLieuKhachHang();
+        cbbLoaiKhachHang.setModel(  Manager.homePage.LayDuLieucbb("LoaiKhachHang", "TenLoaiKhachHang", "MaLoaiKhachHang"));
         for (int i = 1; i < 32; i++) {
             cbbNgay.addItem(String.valueOf(i));
         }
@@ -498,7 +498,7 @@ int tam=0;
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
           rbtnNam.setSelected(true);
-        cbbLoaiKhachHang.setModel(Manager.frmTC.LayDuLieucbb("LoaiKhachHang", "TenLoaiKhachHang", "MaLoaiKhachHang"));
+        cbbLoaiKhachHang.setModel(Manager.homePage.LayDuLieucbb("LoaiKhachHang", "TenLoaiKhachHang", "MaLoaiKhachHang"));
         for (int i = 1; i < 32; i++) {
             cbbNgay.addItem(String.valueOf(i));
         }

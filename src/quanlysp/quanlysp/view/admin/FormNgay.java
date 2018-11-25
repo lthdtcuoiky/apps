@@ -3,27 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.quanlysp.view;
-
-
-
-import com.quanlysp.managerquery.Manager;
-
-import javax.swing.*;
+package view.admin;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import javax.swing.DefaultComboBoxModel;
+
+import controlller.Manager;
+
+
 
 /**
  *
  * @author huy
  */
-public class frmNgay extends javax.swing.JFrame {
+public class FormNgay extends javax.swing.JFrame {
 
     /**
      * Creates new form frmNgay
      */
-    public frmNgay() {
+    public FormNgay() {
 
         initComponents();
 
@@ -226,7 +226,7 @@ public class frmNgay extends javax.swing.JFrame {
                 Integer.valueOf(cbbThang.getSelectedItem().toString())!=month &&
                 Integer.valueOf(cbbNam.getSelectedItem().toString())!=year){
                       strNgaySinh = cbbNam.getSelectedItem().toString() + "-" + cbbThang.getSelectedItem().toString() + "-" + cbbNgay.getSelectedItem().toString();
-        Manager.frmTC.SetNgayLap(strNgaySinh);
+        Manager.homePage.SetNgayLap(strNgaySinh);
            
         this.dispose();
         }   
@@ -264,7 +264,7 @@ public class frmNgay extends javax.swing.JFrame {
     public String strNgaySinh;
     private void btnOke_NgayLapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOke_NgayLapActionPerformed
         strNgaySinh = cbbNam.getSelectedItem().toString() + "-" + cbbThang.getSelectedItem().toString() + "-" + cbbNgay.getSelectedItem().toString();
-        Manager.frmTC.SetNgayLap(strNgaySinh);
+        Manager.homePage.SetNgayLap(strNgaySinh);
         
         this.dispose();
         
@@ -277,7 +277,7 @@ public class frmNgay extends javax.swing.JFrame {
                 Integer.valueOf(cbbThang.getSelectedItem().toString())!=month &&
                 Integer.valueOf(cbbNam.getSelectedItem().toString())!=year){
                       strNgaySinh = cbbNam.getSelectedItem().toString() + "-" + cbbThang.getSelectedItem().toString() + "-" + cbbNgay.getSelectedItem().toString();
-        Manager.frmTC.SetNgayLap(strNgaySinh);
+        Manager.homePage.SetNgayLap(strNgaySinh);
            
         this.dispose();
         }   
@@ -292,7 +292,7 @@ public class frmNgay extends javax.swing.JFrame {
                 Integer.valueOf(cbbThang.getSelectedItem().toString())!=month &&
                 Integer.valueOf(cbbNam.getSelectedItem().toString())!=year){
                       strNgaySinh = cbbNam.getSelectedItem().toString() + "-" + cbbThang.getSelectedItem().toString() + "-" + cbbNgay.getSelectedItem().toString();
-        Manager.frmTC.SetNgayLap(strNgaySinh);
+        Manager.homePage.SetNgayLap(strNgaySinh);
            
         this.dispose();
         }   
@@ -319,20 +319,20 @@ public class frmNgay extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmNgay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormNgay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmNgay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormNgay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmNgay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormNgay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmNgay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormNgay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmNgay().setVisible(true);
+                new FormNgay().setVisible(true);
             }
         });
     }
