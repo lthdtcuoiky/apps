@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 24, 2018 lúc 12:43 PM
+-- Thời gian đã tạo: Th10 25, 2018 lúc 02:52 PM
 -- Phiên bản máy phục vụ: 10.1.36-MariaDB
--- Phiên bản PHP: 7.2.10
+-- Phiên bản PHP: 7.2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -141,11 +141,19 @@ CREATE TABLE `tai_khoan` (
   `stt` int(11) NOT NULL,
   `id` int(255) NOT NULL,
   `ma_nhan_vien` int(11) NOT NULL,
-  `ten_dang_nhap` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `quyen` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `username` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `quyen` int(15) NOT NULL,
   `chu_thich` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `pass_word` varchar(40) COLLATE utf8_unicode_ci NOT NULL
+  `password` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `ten_nhan_vien` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `tai_khoan`
+--
+
+INSERT INTO `tai_khoan` (`stt`, `id`, `ma_nhan_vien`, `username`, `quyen`, `chu_thich`, `password`, `ten_nhan_vien`) VALUES
+(1, 1, 1, 'admin', 2, 'quản lý', 'admin', 'Duy');
 
 --
 -- Chỉ mục cho các bảng đã đổ
