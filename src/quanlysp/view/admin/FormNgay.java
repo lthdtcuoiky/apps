@@ -226,7 +226,7 @@ public class FormNgay extends javax.swing.JFrame {
                 Integer.valueOf(cbbThang.getSelectedItem().toString())!=month &&
                 Integer.valueOf(cbbNam.getSelectedItem().toString())!=year){
                       strNgaySinh = cbbNam.getSelectedItem().toString() + "-" + cbbThang.getSelectedItem().toString() + "-" + cbbNgay.getSelectedItem().toString();
-        Manager.frmTC.SetNgayLap(strNgaySinh);
+        Manager.homePage.SetNgayLap(strNgaySinh);
            
         this.dispose();
         }   
@@ -264,7 +264,7 @@ public class FormNgay extends javax.swing.JFrame {
     public String strNgaySinh;
     private void btnOke_NgayLapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOke_NgayLapActionPerformed
         strNgaySinh = cbbNam.getSelectedItem().toString() + "-" + cbbThang.getSelectedItem().toString() + "-" + cbbNgay.getSelectedItem().toString();
-        Manager.frmTC.SetNgayLap(strNgaySinh);
+        Manager.homePage.SetNgayLap(strNgaySinh);
         
         this.dispose();
         
@@ -277,7 +277,7 @@ public class FormNgay extends javax.swing.JFrame {
                 Integer.valueOf(cbbThang.getSelectedItem().toString())!=month &&
                 Integer.valueOf(cbbNam.getSelectedItem().toString())!=year){
                       strNgaySinh = cbbNam.getSelectedItem().toString() + "-" + cbbThang.getSelectedItem().toString() + "-" + cbbNgay.getSelectedItem().toString();
-        Manager.frmTC.SetNgayLap(strNgaySinh);
+        Manager.homePage.SetNgayLap(strNgaySinh);
            
         this.dispose();
         }   
@@ -292,7 +292,7 @@ public class FormNgay extends javax.swing.JFrame {
                 Integer.valueOf(cbbThang.getSelectedItem().toString())!=month &&
                 Integer.valueOf(cbbNam.getSelectedItem().toString())!=year){
                       strNgaySinh = cbbNam.getSelectedItem().toString() + "-" + cbbThang.getSelectedItem().toString() + "-" + cbbNgay.getSelectedItem().toString();
-        Manager.frmTC.SetNgayLap(strNgaySinh);
+        Manager.homePage.SetNgayLap(strNgaySinh);
            
         this.dispose();
         }   

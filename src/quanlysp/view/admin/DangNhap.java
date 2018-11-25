@@ -34,7 +34,7 @@ import controlller.Manager;
 /**
  * @author Windows 10 Version 2
  */
-public class ViewDangNhap extends JFrame {
+public class DangNhap extends JFrame {
 	private JButton btnDangNhap;
 	private JButton btnĐangKy;
 	private JCheckBox chkbNhoMatKhau;
@@ -49,10 +49,10 @@ public class ViewDangNhap extends JFrame {
 	private JPasswordField txtPassword;
 	private JTextField txtUserName;
 	private String tendangnhap = "", matkhau = "";
-	public static int quyen = 0;
-	public String ten = "", user = "";
+	private  String quyen ;
+	private String ten = "", user = "";
 
-	public ViewDangNhap() {
+	public DangNhap() {
 		initComponents();
 		this.setLocation(300, 200);
 		setLocationRelativeTo(null);
@@ -280,9 +280,6 @@ public class ViewDangNhap extends JFrame {
 		String strUsername = txtUserName.getText().trim();
 		String strPassword = String.valueOf(txtPassword.getPassword()).trim();
 
-		String sql = "SELECT * FROM app_ban_hang.tai_khoan WHERE username = '" + strUsername + "' AND password ='"
-				+ strPassword + "'";
-		ResultSet rs = Manager.connection.excuteQuerySelect(sql);
 		String luumk = "", luutdn = "";
 		if (chkbNhoMatKhau.isSelected()) {
 			luutdn = strUsername;
@@ -327,10 +324,6 @@ public class ViewDangNhap extends JFrame {
 		try {
 			if (rs.next()) {
 				result = true;
-				quyen = rs.getInt("Quyen");
-				ten = rs.getString("TenNhanVien");
-				user = rs.getString("UserName");
-				System.out.println(" " + quyen);
 			}
 		} catch (SQLException ex) {
 			System.out.println("lỗi đăng nhập");
@@ -393,13 +386,13 @@ public class ViewDangNhap extends JFrame {
 				}
 			}
 		} catch (ClassNotFoundException ex) {
-			Logger.getLogger(ViewDangNhap.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(DangNhap.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (InstantiationException ex) {
-			Logger.getLogger(ViewDangNhap.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(DangNhap.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (IllegalAccessException ex) {
-			Logger.getLogger(ViewDangNhap.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(DangNhap.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			Logger.getLogger(ViewDangNhap.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(DangNhap.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		// </editor-fold>
 		// </editor-fold>
@@ -407,7 +400,7 @@ public class ViewDangNhap extends JFrame {
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new ViewDangNhap().setVisible(true);
+				new DangNhap().setVisible(true);
 			}
 		});
 	}

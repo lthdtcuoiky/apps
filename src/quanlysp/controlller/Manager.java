@@ -14,7 +14,7 @@ import view.admin.ViewTrangChu;
  * @author huy
  */
 public class Manager {
-  public static ViewTrangChu frmTC=new ViewTrangChu();
+  public static ViewTrangChu homePage =new ViewTrangChu();
      public static ConnectDB connection = new  ConnectDB ();
 
     public static void main(String[] args) {

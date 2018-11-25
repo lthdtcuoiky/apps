@@ -2230,14 +2230,14 @@ public class ViewTrangChu extends JFrame {
             String ctvKiemThu = "select count(MaCTPN) as SoChiTietPhieuMua"
                     + " from PhieuNhap,ChiTietPhieuNhap where PhieuNhap.MaPhieuNhap=ChiTietPhieuNhap.MaPhieuNhap and "
                     + "PhieuNhap.MaPhieuNhap= " + MaPhieuNhap;
-            ResultSet rs1 = Manager.connection.ExcuteQueryGetTable(ctvKiemThu);
+            ResultSet rs1 = Manager.connection.excuteQuerySelect(ctvKiemThu);
             System.out.println(ctvKiemThu);
             int so1 = 0;
             try {
                 if (rs1.next()) {
                     so1 = rs1.getInt("SoChiTietPhieuMua");
                     if (rs1.getInt("SoChiTietPhieuMua") == 0) {
-                        Manager.connection.ExcuteQueryUpdateDB(cautruyvan);
+                        Manager.connection.excuteQueryUpdate(cautruyvan);
                         System.out.println("đã xóa");
                         LayDuLieuPhieuNhap();
                     } else {
@@ -2329,7 +2329,7 @@ public class ViewTrangChu extends JFrame {
         System.out.println(cautruyvan);
         boolean kiemtra = KiemTraNhanSanPham(0);
         if (kiemtra) {
-            Manager.connection.ExcuteQueryUpdateDB(cautruyvan);
+            Manager.connection.excuteQueryUpdate(cautruyvan);
             System.out.println("Đã Thêm Thành Công");
         } else {
             System.out.println("Thất Bại");
@@ -2358,7 +2358,7 @@ public class ViewTrangChu extends JFrame {
         System.out.println(cautruyvan);
         boolean kiemtra = KiemTraNhanSanPham(1);
         if (kiemtra) {
-            Manager.connection.ExcuteQueryUpdateDB(cautruyvan);
+            Manager.connection.excuteQueryUpdate(cautruyvan);
             System.out.println("Đã Sửa Thành Công Sản Phẩm");
         } else {
             System.out.println("Thất Bại");
@@ -2451,7 +2451,7 @@ public class ViewTrangChu extends JFrame {
 
         boolean kiemtra = KiemTraNhapNhanVien(0);
         if (kiemtra) {
-            Manager.connection.ExcuteQueryUpdateDB(cautruyvan);
+            Manager.connection.excuteQueryUpdate(cautruyvan);
             System.out.println("Đã Thêm Thành Công");
             System.out.println(cautruyvan);
         } else {
@@ -2563,7 +2563,7 @@ public class ViewTrangChu extends JFrame {
                 + ChucVu + ",DiaChi=N'" + DiaChi + "',SoDT='" + SoDT + "',GhiChu=N'" + GhiChu + "'where MaNhanVien=" + MaNhanVien;
         boolean kiemtra = KiemTraNhapNhanVien(1);
         if (kiemtra) {
-            Manager.connection.ExcuteQueryUpdateDB(cautruyvan);
+            Manager.connection.excuteQueryUpdate(cautruyvan);
             System.out.println("Đã sửa Thành Công");
         } else {
             ThongBao("Không thể sửa Nhân Viên", "lỗi", 2);
@@ -2625,7 +2625,7 @@ public class ViewTrangChu extends JFrame {
         System.out.println(cautruyvan);
         boolean kiemtra = true;
         if (kiemtra) {
-            Manager.connection.ExcuteQueryUpdateDB(cautruyvan);
+            Manager.connection.excuteQueryUpdate(cautruyvan);
             System.out.println("Đã Thêm Thành Công");
         } else {
             ThongBao("Không thể Thêm tài Khoản", "lỗi", 2);
@@ -2646,7 +2646,7 @@ public class ViewTrangChu extends JFrame {
                 + ",ChuThich= N'" + ChuThich + "'Where ID=" + ID;
         boolean kiemtra = true;
         if (kiemtra) {
-            Manager.connection.ExcuteQueryUpdateDB(cautruyvan);
+            Manager.connection.excuteQueryUpdate(cautruyvan);
             System.out.println("Đã Sửa Thành Công tài khoản có id=" + ID);
         } else {
             ThongBao("Không thể Sửa tài Khoản với Tên đăng nhập là =" + TenDangNhap, "lỗi", 2);
@@ -2723,7 +2723,7 @@ public class ViewTrangChu extends JFrame {
                 + ",N'" + DiaChi + "','" + SDT + "'," + LoaiKhachHang + ", N'" + ChuThich + "')";
         boolean kiemtra = KiemTraNhapKhachHang(0);
         if (kiemtra) {
-            Manager.connection.ExcuteQueryUpdateDB(cautruyvan);
+            Manager.connection.excuteQueryUpdate(cautruyvan);
             System.out.println("Đã Thêm Thành Công");
             System.out.println(cautruyvan);
 
@@ -2795,7 +2795,7 @@ public class ViewTrangChu extends JFrame {
         System.out.println(cautruyvan);
         boolean kiemtra = KiemTraNhapKhachHang(1);
         if (kiemtra) {
-            Manager.connection.ExcuteQueryUpdateDB(cautruyvan);
+            Manager.connection.excuteQueryUpdate(cautruyvan);
             System.out.println("Đã sủa Thành Công");
         } else {
             System.out.println("Sửa thất bại");
@@ -2842,7 +2842,7 @@ public class ViewTrangChu extends JFrame {
         System.out.println(cautruyvan);
         boolean kiemtra = true;
         if (kiemtra) {
-            Manager.connection.ExcuteQueryUpdateDB(cautruyvan);
+            Manager.connection.excuteQueryUpdate(cautruyvan);
             System.out.println("Đã Thêm Thành Công");
         } else {
             ThongBao("Không thể Thêm chức Vụ", "lỗi", 2);
@@ -2860,7 +2860,7 @@ public class ViewTrangChu extends JFrame {
         System.out.println(cautruyvan);
         boolean kiemtra = true;
         if (kiemtra) {
-            Manager.connection.ExcuteQueryUpdateDB(cautruyvan);
+            Manager.connection.excuteQueryUpdate(cautruyvan);
             System.out.println("Đã Sửa Thành Công");
         } else {
             ThongBao("Không thể Sửa chức Vụ", "lỗi", 2);
@@ -2992,10 +2992,10 @@ public class ViewTrangChu extends JFrame {
         String cautruyvan = "delete SanPham where MaSanPham=" + MaSanPham;
         String ctvKiemThu = "select count(MaCTHD) as SoChiTietHoaDon"
                 + " from SanPham,ChiTietHoaDon where SanPham.MaSanPham=ChiTietHoaDon.MaSanPham and SanPham.MaSanPham=" + MaSanPham;
-        ResultSet rs1 = Manager.connection.ExcuteQueryGetTable(ctvKiemThu);
+        ResultSet rs1 = Manager.connection.excuteQuerySelect(ctvKiemThu);
         String ctvKiemThu2 = "select count(MaCTPN) as SoChiTietPhieuNhap"
                 + " from SanPham,ChiTietPhieuNhap where SanPham.MaSanPham=ChiTietPhieuNhap.MaSanPham and SanPham.MaSanPham=" + MaSanPham;
-        ResultSet rs2 = Manager.connection.ExcuteQueryGetTable(ctvKiemThu2);
+        ResultSet rs2 = Manager.connection.excuteQuerySelect(ctvKiemThu2);
         int so1 = 0, so2 = 0;
 
         try {
@@ -3010,7 +3010,7 @@ public class ViewTrangChu extends JFrame {
             if (rs2.next()) {
                 so2 = rs2.getInt("SoChiTietPhieuNhap");
                 if (rs2.getInt("SoChiTietPhieuNhap") == 0 && so1 == 0) {
-                    Manager.connection.ExcuteQueryUpdateDB(cautruyvan);
+                    Manager.connection.excuteQueryUpdate(cautruyvan);
                     System.out.println("đã xóa");
                     LayDuLieuSanPham("1");
                     return true;
@@ -3033,14 +3033,14 @@ public class ViewTrangChu extends JFrame {
             String ctvKiemThu = "select count(MaHoaDon) as SoPhieuMua"
                     + " from KhachHang,HoaDon where KhachHang.MaKhachHang=HoaDon.MaKhachHang"
                     + " and  KhachHang.MaKhachHang=" + MaKhachHang;
-            ResultSet rs1 = Manager.connection.ExcuteQueryGetTable(ctvKiemThu);
+            ResultSet rs1 = Manager.connection.excuteQuerySelect(ctvKiemThu);
             System.out.println(ctvKiemThu);
             int so1 = 0;
             try {
                 if (rs1.next()) {
                     so1 = rs1.getInt("SoPhieuMua");
                     if (rs1.getInt("SoPhieuMua") == 0) {
-                        Manager.connection.ExcuteQueryUpdateDB(cautruyvan);
+                        Manager.connection.excuteQueryUpdate(cautruyvan);
                         System.out.println("đã xóa");
                         layDuLieuKhachHang();
                         ResKhachHang();
@@ -3064,10 +3064,10 @@ public class ViewTrangChu extends JFrame {
             String cautruyvan = "delete NhanVien where MaNhanVien=" + MaNhanVien;
             String ctvKiemThu = "select count(MaHoaDon) as SoHoaDon"
                     + " from NhanVien,HoaDon where NhanVien.MaNhanVien=HoaDon.MaNhanVien and NhanVien.MaNhanVien=" + MaNhanVien;
-            ResultSet rs1 = Manager.connection.ExcuteQueryGetTable(ctvKiemThu);
+            ResultSet rs1 = Manager.connection.excuteQuerySelect(ctvKiemThu);
             String ctvKiemThu2 = "select count(MaPhieuNhap) as SoPhieuNhap"
                     + " from NhanVien,PhieuNhap where NhanVien.MaNhanVien=PhieuNhap.MaNhanVien and NhanVien.MaNhanVien=" + MaNhanVien;
-            ResultSet rs2 = Manager.connection.ExcuteQueryGetTable(ctvKiemThu2);
+            ResultSet rs2 = Manager.connection.excuteQuerySelect(ctvKiemThu2);
             int so1 = 0, so2 = 0;
 
             try {
@@ -3082,7 +3082,7 @@ public class ViewTrangChu extends JFrame {
                 if (rs2.next()) {
                     so2 = rs2.getInt("SoPhieuNhap");
                     if (rs2.getInt("SoPhieuNhap") == 0 && so1 == 0) {
-                        Manager.connection.ExcuteQueryUpdateDB(cautruyvan);
+                        Manager.connection.excuteQueryUpdate(cautruyvan);
                         System.out.println("đã xóa");
                         layDuLieuNhanVien();
                         ResNhanVien();
@@ -3206,7 +3206,7 @@ public class ViewTrangChu extends JFrame {
         }
         if (!txtMaPhieuNhap_CTPN.equals("") && kiemtra==true) {
 
-            Manager.connection.ExcuteQueryUpdateDB(cautruyvan);
+            Manager.connection.excuteQueryUpdate(cautruyvan);
             System.out.println("Đã sửa Thành Công");
         } else {
             ThongBao("Không thể Thêm ", "lỗi", 2);
@@ -3251,7 +3251,7 @@ public class ViewTrangChu extends JFrame {
         System.out.println(cautruyvan);
         boolean kiemtra = KiemTraNhapHoaDon(1);
         if (kiemtra) {
-            Manager.connection.ExcuteQueryUpdateDB(cautruyvan);
+            Manager.connection.excuteQueryUpdate(cautruyvan);
             System.out.println("Đã Thêm Thành Công");
         } else {
             ThongBao("Không thể ", "Thêm Hóa Đơn", 2);
@@ -3265,14 +3265,14 @@ public class ViewTrangChu extends JFrame {
             String cautruyvan = "delete HoaDon where MaHoaDon=" + MaHoaDon;
             String ctvKiemThu = "select count(MaCTHD) as SoChiTietPhieuMua"
                     + " from HoaDon,ChiTietHoaDon where HoaDon.MaHoaDon=ChiTietHoaDon.MaHoaDon and HoaDon.MaHoaDon=" + MaHoaDon;
-            ResultSet rs1 = Manager.connection.ExcuteQueryGetTable(ctvKiemThu);
+            ResultSet rs1 = Manager.connection.excuteQuerySelect(ctvKiemThu);
             System.out.println(ctvKiemThu);
             int so1 = 0;
             try {
                 if (rs1.next()) {
                     so1 = rs1.getInt("SoChiTietPhieuMua");
                     if (rs1.getInt("SoChiTietPhieuMua") == 0) {
-                        Manager.connection.ExcuteQueryUpdateDB(cautruyvan);
+                        Manager.connection.excuteQueryUpdate(cautruyvan);
                         System.out.println("đã xóa");
                         LayDuLieuHoaDon();
                     } else {
@@ -3298,7 +3298,7 @@ public class ViewTrangChu extends JFrame {
         System.out.println(cautruyvan);
         boolean kiemtra = KiemTraNhapHoaDon(0);
         if (kiemtra) {
-            Manager.connection.ExcuteQueryUpdateDB(cautruyvan);
+            Manager.connection.excuteQueryUpdate(cautruyvan);
             System.out.println("Đã Thêm Thành Công");
         } else {
             System.out.println("thất bại");
@@ -3541,7 +3541,7 @@ public class ViewTrangChu extends JFrame {
     public int GetGiaSanPham(String MaSP) {
         int Gia = 0;
         String cautruyvan = "select * from sanpham where MaSanPham=" + MaSP;
-        ResultSet rs = Manager.connection.ExcuteQueryGetTable(cautruyvan);
+        ResultSet rs = Manager.connection.excuteQuerySelect(cautruyvan);
         try {
             if (rs.next()) {
                 Gia = rs.getInt("Giaban");
@@ -3585,7 +3585,7 @@ public class ViewTrangChu extends JFrame {
         String cautruyvan = "";
         cautruyvan = "select MaHoaDon,KhachHang.TenKhachHang as TenKhachHang,NhanVien.TenNhanVien,TongTien,NgayLapHoaDon,HoaDon.GhiChu from hoadon,khachhang,nhanvien where hoadon.MaKhachHang =khachhang.MaKhachHang "
                 + "and hoadon.MaNhanVien=nhanvien.MaNhanVien ";
-        ResultSet rs = Manager.connection.ExcuteQueryGetTable(cautruyvan);
+        ResultSet rs = Manager.connection.excuteQuerySelect(cautruyvan);
         Object[] obj = new Object[]{"STT", "Mã hóa đơn", "Khách Hàng ", "Nhân viên", "Ngày lập hóa dơn", "tổng tiền", "Chú Thích"};
         DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
         tblHoaDon_HoaDon.setModel(tableModel);
@@ -3612,7 +3612,7 @@ public class ViewTrangChu extends JFrame {
         String cautruyvan = "";
         cautruyvan = "select MaCTHD,MaHoaDon,SanPham.TenSanPham,SoLuong,TongTien,ChiTietHoaDon.GhiChu "
                 + " from ChiTietHoaDon,SanPham where ChiTietHoaDon.MaSanPham=SanPham.MaSanPham  and MaHoaDon=" + MaHoaDon;
-        ResultSet rs = Manager.connection.ExcuteQueryGetTable(cautruyvan);
+        ResultSet rs = Manager.connection.excuteQuerySelect(cautruyvan);
         Object[] obj = new Object[]{"STT", "Mã CTHD", "Mã Hóa Đơn", "Sản Phẩm", "Số Lượng", "tổng tiền", "Chú Thích"};
         DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
         tblCTHoaDon_ChiTietHoaDon.setModel(tableModel);
@@ -3639,7 +3639,7 @@ public class ViewTrangChu extends JFrame {
         String cautruyvan = "";
         cautruyvan = "select MaPhieuNhap,NhanVien.TenNhanVien,NhaPhanPhoi.TenNhaPhanPhoi,TongTien,NgayNhap,PhieuNhap.ChuThich"
                 + " from PhieuNhap,NhanVien,NhaPhanPhoi where PhieuNhap.MaNhanVien =NhanVien.MaNhanVien and PhieuNhap.MaNhaPhanPhoi=NhaPhanPhoi.MaNhaPhanPhoi ";
-        ResultSet rs = Manager.connection.ExcuteQueryGetTable(cautruyvan);
+        ResultSet rs = Manager.connection.excuteQuerySelect(cautruyvan);
         Object[] obj = new Object[]{"STT", "Mã Phiếu Nhập", "Nhân Viên Nhập", "Tên Nhà Phân phối", "Thành tiền", "Ngày lập", "Chú Thích"};
         DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
         tblPhieuNhap_PhieuNhap.setModel(tableModel);
@@ -3669,7 +3669,7 @@ public class ViewTrangChu extends JFrame {
                 + " from PhieuNhap,ChiTietPhieuNhap,SanPham where "
                 + "PhieuNhap.MaPhieuNhap=ChiTietPhieuNhap.MaPhieuNhap and"
                 + " SanPham.MaSanPham=ChiTietPhieuNhap.MaSanPham and ChiTietPhieuNhap.MaphieuNhap=" + MaPhieuNhap;
-        ResultSet rs = Manager.connection.ExcuteQueryGetTable(cautruyvan);
+        ResultSet rs = Manager.connection.excuteQuerySelect(cautruyvan);
         Object[] obj = new Object[]{"STT", "Mã CTPN", "Mã Phiếu Nhập", "Sản Phẩm", "Số Lượng", "Tổng Tiền", "Chú Thích"};
         DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
         //  tblChiTietPhieuNhap_PhieuNhap.setModel(tableModel);
@@ -3697,7 +3697,7 @@ public class ViewTrangChu extends JFrame {
         cautruyvan = "select MaSanPham,SanPham.TenSanPham,SanPham.LoaiSanPham,GiaNhap,GiaBan,HangsanXuat.TenHangSanXuat as THSX,TonKho,LoaiSanPham.TenLoaiSanPham"
                 + " as TenLoaiSanPham,Image,SanPham.ChuThich from SanPham,LoaiSanPham,HangSanXuat where "
                 + "SanPham.LoaiSanPham=LoaiSanPham.MaLoaiSanPham and SanPham.HangSanXuat=HangSanXuat.MaHangSanXuat and TrangThai=" + TrangThai;
-        ResultSet rs = Manager.connection.ExcuteQueryGetTable(cautruyvan);
+        ResultSet rs = Manager.connection.excuteQuerySelect(cautruyvan);
         Object[] obj = new Object[]{"STT", "Mã Sản Phẩm", "Tên sản phẩm", "Loại sản phẩm", "Giá nhập", "Giá bán", "Hãng sản Xuất", "Tồn kho", "ảnh", "Chú Thích"};
         DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
         tblSanPham.setModel(tableModel);
@@ -3736,7 +3736,7 @@ public class ViewTrangChu extends JFrame {
         cautruyvan = "select MaSanPham,SanPham.TenSanPham,SanPham.LoaiSanPham,GiaNhap,GiaBan,HangsanXuat.TenHangSanXuat as THSX,TonKho,LoaiSanPham.TenLoaiSanPham"
                 + " as TenLoaiSanPham,Image,SanPham.ChuThich from SanPham,LoaiSanPham,HangSanXuat where "
                 + "SanPham.LoaiSanPham=LoaiSanPham.MaLoaiSanPham and SanPham.HangSanXuat=HangSanXuat.MaHangSanXuat and TrangThai=1 and " + wheretk;
-        ResultSet rs = Manager.connection.ExcuteQueryGetTable(cautruyvan);
+        ResultSet rs = Manager.connection.excuteQuerySelect(cautruyvan);
         Object[] obj = new Object[]{"STT", "Mã Sản Phẩm", "Tên sản phẩm", "Loại sản phẩm", "Giá nhập", "Giá bán", "Hãng sản Xuất", "Tồn kho", "ảnh", "Chú Thích"};
         DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
         tblSanPham.setModel(tableModel);
@@ -3767,7 +3767,7 @@ public class ViewTrangChu extends JFrame {
 
         cautruyvan = "select * from KhachHang,LoaiKhachHang "
                 + "where KhachHang.LoaiKhachHang=LoaiKhachHang.MaLoaiKhachHang and " + wheretk;
-        ResultSet rs = Manager.connection.ExcuteQueryGetTable(cautruyvan);
+        ResultSet rs = Manager.connection.excuteQuerySelect(cautruyvan);
         Object[] obj = new Object[]{"STT", "Mã Khách Hàng", "Tên Khách Hàng", "Ngày Sinh", "Giới Tính", "Dịa Chỉ", "SDT", "Loại Khách Hàng", "Chú Thích"};
         DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
         tblKhachHang_KhachHang.setModel(tableModel);
@@ -3800,7 +3800,7 @@ public class ViewTrangChu extends JFrame {
         String cautruyvan = "";
         cautruyvan = "select * from KhachHang,LoaiKhachHang "
                 + "where KhachHang.LoaiKhachHang=LoaiKhachHang.MaLoaiKhachHang";
-        ResultSet rs = Manager.connection.ExcuteQueryGetTable(cautruyvan);
+        ResultSet rs = Manager.connection.excuteQuerySelect(cautruyvan);
         Object[] obj = new Object[]{"STT", "Mã Khách Hàng", "Tên Khách Hàng", "Ngày Sinh", "Giới Tính", "Dịa Chỉ", "SDT", "Loại Khách Hàng", "Chú Thích"};
         DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
         tblKhachHang_KhachHang.setModel(tableModel);
@@ -3833,7 +3833,7 @@ public class ViewTrangChu extends JFrame {
         String cautruyvan = "";
         cautruyvan = "select * from NhanVien,ChucVu "
                 + "where NhanVien.ChucVu=ChucVu.MaChucVu";
-        ResultSet rs = Manager.connection.ExcuteQueryGetTable(cautruyvan);
+        ResultSet rs = Manager.connection.excuteQuerySelect(cautruyvan);
         Object[] obj = new Object[]{"STT", "Mã Nhân Viên", "Tên Nhân Viên", "Ngày Sinh", "Giới Tính", "Ngày Vào Làm", "Chức Vụ", "Dịa Chỉ", "SDT", "Chú Thích"};
         DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
         tblNhanVien_NhanVien.setModel(tableModel);
@@ -3868,7 +3868,7 @@ public class ViewTrangChu extends JFrame {
         cautruyvan = "select ID, NhanVien.TenNhanVien ,Users.TenDangNhap,Users.Password"
                 + ",Quyen.TenQuyen,Users.ChuThich  from Users,NhanVien,Quyen "
                 + "where Users.MaNhanVien=NhanVien.MaNhanVien and Users.Quyen=Quyen.MaQuyen";
-        ResultSet rs = Manager.connection.ExcuteQueryGetTable(cautruyvan);
+        ResultSet rs = Manager.connection.excuteQuerySelect(cautruyvan);
         Object[] obj = new Object[]{"STT", "ID", "Nhân Viên", "Tên Đăng Nhập", "Password", "Quyền", "Chú Thích"};
         DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
         tblTaiKhoan_TaiKhoan.setModel(tableModel);
@@ -3894,7 +3894,7 @@ public class ViewTrangChu extends JFrame {
     public void layDuLieuLoaiSanPham() {
         String cautruyvan = "";
         cautruyvan = "select * from LoaiSanPham ";
-        ResultSet rs = Manager.connection.ExcuteQueryGetTable(cautruyvan);
+        ResultSet rs = Manager.connection.excuteQuerySelect(cautruyvan);
         Object[] obj = new Object[]{"STT", "Mã Loại", "Tên Loại"};
         DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
         tblLoaiSanPham_LoaiSanPham.setModel(tableModel);
@@ -3917,7 +3917,7 @@ public class ViewTrangChu extends JFrame {
     public void layDuLieuChucVu() {
         String cautruyvan = "";
         cautruyvan = "select * from ChucVu ";
-        ResultSet rs = Manager.connection.ExcuteQueryGetTable(cautruyvan);
+        ResultSet rs = Manager.connection.excuteQuerySelect(cautruyvan);
         Object[] obj = new Object[]{"STT", "Mã ", "Tên Chức Vụ", "Ghi Chú"};
         DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
         tblChucVu_ChucVu.setModel(tableModel);
@@ -3941,7 +3941,7 @@ public class ViewTrangChu extends JFrame {
         String cautruyvan = "";
         cautruyvan = "select * from NhanVien,ChucVu "
                 + "where NhanVien.ChucVu=ChucVu.MaChucVu and ChucVu=" + MaChucVu;
-        ResultSet rs = Manager.connection.ExcuteQueryGetTable(cautruyvan);
+        ResultSet rs = Manager.connection.excuteQuerySelect(cautruyvan);
         Object[] obj = new Object[]{"STT", "Mã Nhân Viên", "Tên Nhân Viên", "Chức Vụ"};
         DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
         tblNhanVien_ChucVu.setModel(tableModel);
@@ -3974,7 +3974,7 @@ public class ViewTrangChu extends JFrame {
 
     public DefaultComboBoxModel LayDuLieucbb(String bang, String Ten, String Ma) {
         String cautruyvan = "select *from " + bang;
-        ResultSet rs = Manager.connection.ExcuteQueryGetTable(cautruyvan);
+        ResultSet rs = Manager.connection.excuteQuerySelect(cautruyvan);
         DefaultComboBoxModel cbbmodel = new DefaultComboBoxModel();
         try {
             while (rs.next()) {

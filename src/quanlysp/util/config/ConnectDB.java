@@ -2,46 +2,50 @@ package util.config;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class ConnectDB {
+	private static String url = "jdbc:mysql://localhost:3306/app_ban_hang?seUnicode=true&characterEncoding=utf-8";
+	private static String user = "root";
+	private static String password = "";
+	private static Connection connect = null;
+	private static PreparedStatement ps;
 
-	private static Connection conn = null;
-
-	public ConnectDB() {
-
+	static {
 		try {
-
-			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/quanlysanpham";
-			String user = "tuananh99";
-			String password = "1999";
-			conn = DriverManager.getConnection(url, user, password);
-
-			if (conn != null) {
-				System.out.println("Kết nối CSDL SQL Server thành công!");
-			}
-
-		} catch (ClassNotFoundException ex) {
-			System.out.println(ex.toString());
-			System.out.println("Lỗi" + ex.getMessage());
-		} catch (SQLException ex) {
-			System.out.println(ex.toString());
-			System.out.println("Lỗi :" + ex.getMessage());
+			initConnection();
+		} catch (ClassNotFoundException e) {
+			System.out.println("lỗi khởi tạo Driver MySQL");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("lỗi khởi tạo kết nối MySQL");
+			e.printStackTrace();
 		}
 	}
 
+	private static void initConnection() throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.jdbc.Driver");
+		connect = DriverManager.getConnection(url, user, password);
+		System.out.println("Kết nối thành công");
+	}
+
+	public static Connection getConnection() {
+		return connect;
+	}
+
 	// Thực thi câu lệnh SELECT
-	public ResultSet ExcuteQueryGetTable(String cauTruyVanSQL) {
+	public ResultSet excuteQuerySelect(String sql) {
 		try {
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(cauTruyVanSQL);
+			Statement stmt = connect.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			System.out.println("truy vấn thành công");
 			return rs;
-		} catch (SQLException ex) {
-			System.out.println(ex.toString());
+		} catch (SQLException e) {
 			System.out.println("Truy vấn thất bại");
+			e.printStackTrace();
 
 		}
 
@@ -49,15 +53,17 @@ public class ConnectDB {
 	}
 
 	// Thực thi INSERT, DELETE, UPDATE
-	public void ExcuteQueryUpdateDB(String cauTruyVanSQL) {
+	public void excuteQueryUpdate(String sql) {
 
 		try {
-			Statement stmt = conn.createStatement();
-			stmt.executeUpdate(cauTruyVanSQL);
-		} catch (SQLException ex) {
-			System.out.println(ex.toString());
+			Statement stmt = connect.createStatement();
+			stmt.executeUpdate(sql);
+		} catch (SQLException e) {
 			System.out.println("Truy vấn thất bại");
+			e.printStackTrace();
 		}
 	}
-
+	public static void main(String[] args) {
+		new ConnectDB();
+	}
 }
