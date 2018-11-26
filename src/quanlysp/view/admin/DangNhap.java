@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package quanlysp.view.admin;
+package view.admin;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,8 +12,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -25,8 +25,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import quanlysp.controlller.LoginController;
-import quanlysp.controlller.Manager;
+import controlller.LoginController;
+import controlller.Manager;
 
 /**
  * @author Windows 10 Version 2
@@ -46,11 +46,11 @@ public class ViewDangNhap extends JFrame {
 	private JPasswordField txtPassword;
 	private JTextField txtUserName;
 	private String tendangnhap = "", matkhau = "";
-	public static int quyen;
+	private  String quyen ;
 	private String ten = "", user = "";
-	private LoginController loginController = new LoginController();
-
-	public ViewDangNhap() {
+	private LoginController loginController;
+	public DangNhap() {
+		loginController = new LoginController();
 		initComponents();
 		this.setLocation(300, 200);
 		setLocationRelativeTo(null);
@@ -119,9 +119,32 @@ public class ViewDangNhap extends JFrame {
 
 		chkbNhoMatKhau.setForeground(new java.awt.Color(102, 153, 255));
 		chkbNhoMatKhau.setText("nhớ Mật Khẩu");
+		chkbNhoMatKhau.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				chkbNhoMatKhauActionPerformed(evt);
+			}
+		});
 
 		btnĐangKy.setForeground(new java.awt.Color(255, 153, 51));
 		btnĐangKy.setText("Đăng ký");
+		btnĐangKy.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+			public void mouseMoved(java.awt.event.MouseEvent evt) {
+				btnĐangKyMouseMoved(evt);
+			}
+		});
+		btnĐangKy.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseExited(java.awt.event.MouseEvent evt) {
+				btnĐangKyMouseExited(evt);
+			}
+
+			public void mousePressed(java.awt.event.MouseEvent evt) {
+				btnĐangKyMousePressed(evt);
+			}
+
+			public void mouseReleased(java.awt.event.MouseEvent evt) {
+				btnĐangKyMouseReleased(evt);
+			}
+		});
 		btnĐangKy.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnĐangKyActionPerformed(evt);
@@ -250,11 +273,11 @@ public class ViewDangNhap extends JFrame {
 		this.dispose();
 	}// GEN-LAST:event_btnĐangKyActionPerformed
 
-	@SuppressWarnings("deprecation")
 	private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDangNhapActionPerformed
 
 		String strUsername = txtUserName.getText().trim();
 		String strPassword = String.valueOf(txtPassword.getPassword()).trim();
+
 		String luumk = "", luutdn = "";
 		if (chkbNhoMatKhau.isSelected()) {
 			luutdn = strUsername;
@@ -281,38 +304,85 @@ public class ViewDangNhap extends JFrame {
 		}
 
 		if (loginController.checkLogin(strUsername, strPassword) == true) {
-			String quyenDN = null;
-			try {
-				String sql = "SELECT * FROM quyen, users WHERE quyen.MaQuyen = users.Quyen AND users.TenDangNhap = '"
-						+ strUsername + "' AND users.Password = '" + strPassword + "';";
-				ResultSet rs = Manager.connection.excuteQuerySelect(sql);
-				if (rs.next()) {
-					quyenDN = rs.getString("TenQuyen");
-					System.out.println(quyenDN);
-				}
-
-			} catch (SQLException e) {
-				System.out.println("lỗi truy vấn nè");
-				e.printStackTrace();
-			}
-			if (quyenDN.equals("admin")) {
-				Manager.homePage.show();
-				this.dispose();
-			} else {
-				Manager.userView.show();
-				this.dispose();
-			}
+			ViewDangKy viewDangKy = new ViewDangKy();
+			Manager.homePage.show();
+			this.dispose();
 		} else {
-			thongBao("Bạn nhập sai tài khoản hoặc mật khẩu", "Lỗi đăng nhập", 2);
+			ThongBao("Bạn nhập sai tài khoản hoặc mật khẩu", "Lỗi đăng nhập", 2);
 		}
+	}// GEN-LAST:event_btnDangNhapActionPerformed
+
+
+	private void chkbNhoMatKhauActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_chkbNhoMatKhauActionPerformed
+		// TODO add your handling code here:
+	}// GEN-LAST:event_chkbNhoMatKhauActionPerformed
+
+	private void btnĐangKyMouseReleased(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_btnĐangKyMouseReleased
+
+	}// GEN-LAST:event_btnĐangKyMouseReleased
+
+	private void btnĐangKyMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_btnĐangKyMousePressed
+
+	}// GEN-LAST:event_btnĐangKyMousePressed
+
+	private void btnĐangKyMouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_btnĐangKyMouseExited
+
+	}// GEN-LAST:event_btnĐangKyMouseExited
+
+	private void btnĐangKyMouseMoved(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_btnĐangKyMouseMoved
+
+	}// GEN-LAST:event_btnĐangKyMouseMoved
+
+	private boolean KiemTraChuaChuVaSo(String chuoiCanKiemTra) {
+		boolean ketQua = false;
+		Pattern p = Pattern.compile(".*[a-zA-Z].*");
+		Matcher m = p.matcher(chuoiCanKiemTra);
+		if (!(chuoiCanKiemTra == chuoiCanKiemTra.toLowerCase())) {
+			ketQua = m.find();
+		}
+		return ketQua;
 	}
 
-	public static void thongBao(String noiDungthongBao, String tieuDethongBao, int icon) {
-		JOptionPane.showMessageDialog(new JFrame(), noiDungthongBao, tieuDethongBao, icon);
+	public static void ThongBao(String noiDungThongBao, String tieuDeThongBao, int icon) {
+		JOptionPane.showMessageDialog(new JFrame(), noiDungThongBao, tieuDeThongBao, icon);
 	}
 
-	public static void main(String[] args) {
-		new ViewDangNhap().setVisible(true);
-		;
-	}
+	/**
+	 * @param args the command line arguments
+	 */
+//	public static void main(String args[]) {
+//		/* Set the Nimbus look and feel */
+//		// <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
+//		// (optional) ">
+//		/*
+//		 * If Nimbus (introduced in Java SE 6) is not available, stay with the default
+//		 * look and feel. For details see
+//		 * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+//		 */
+//		try {
+//			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//				if ("Nimbus".equals(info.getName())) {
+//					javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//					break;
+//				}
+//			}
+//		} catch (ClassNotFoundException ex) {
+//			Logger.getLogger(DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+//		} catch (InstantiationException ex) {
+//			Logger.getLogger(DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+//		} catch (IllegalAccessException ex) {
+//			Logger.getLogger(DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+//		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//			Logger.getLogger(DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+//		}
+//		// </editor-fold>
+//		// </editor-fold>
+//
+//		/* Create and display the form */
+//		java.awt.EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				new DangNhap().setVisible(true);
+//			}
+//		});
+//	}
 }

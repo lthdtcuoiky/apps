@@ -1,4 +1,4 @@
-package view.admin;
+package quanlysp.view.admin;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,7 +20,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import controlller.Manager;
+import quanlysp.controlller.Manager;
 
 /**
  *
@@ -204,7 +204,7 @@ public class ViewDangKy extends JFrame {
 		password = String.valueOf(txtPassword.getPassword()).trim();
 		nhapLai = String.valueOf(txtRetypePasswword.getPassword());
 		String cautruyvan = "SELECT * FROM quyen;";
-		ResultSet rs = Manager.connection.excuteQuerySelect(cautruyvan);
+		ResultSet rs = controlller.Manager,connection.excuteQuerySelect(cautruyvan);
 
 		boolean kt = true;
 

@@ -1,7 +1,27 @@
-package view.admin;/*
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package view.admin;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
-public class FormNgay extends javax.swing.JFrame {
-    public FormNgay() {
+import javax.swing.DefaultComboBoxModel;
+
+import quanlysp.controlller.Manager;
+
+/**
+ *
+ * @author huyS
+ */
+public class frmNgay extends javax.swing.JFrame {
+
+    /**
+     * Creates new form frmNgay
+     */
+    public frmNgay() {
 
         initComponents();
 
@@ -204,7 +224,7 @@ public class FormNgay extends javax.swing.JFrame {
                 Integer.valueOf(cbbThang.getSelectedItem().toString())!=month &&
                 Integer.valueOf(cbbNam.getSelectedItem().toString())!=year){
                       strNgaySinh = cbbNam.getSelectedItem().toString() + "-" + cbbThang.getSelectedItem().toString() + "-" + cbbNgay.getSelectedItem().toString();
-        Manager.homePage.SetNgayLap(strNgaySinh);
+        Manager.frmTC.SetNgayLap(strNgaySinh);
            
         this.dispose();
         }   
@@ -242,7 +262,7 @@ public class FormNgay extends javax.swing.JFrame {
     public String strNgaySinh;
     private void btnOke_NgayLapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOke_NgayLapActionPerformed
         strNgaySinh = cbbNam.getSelectedItem().toString() + "-" + cbbThang.getSelectedItem().toString() + "-" + cbbNgay.getSelectedItem().toString();
-        Manager.homePage.SetNgayLap(strNgaySinh);
+        Manager.frmTC.SetNgayLap(strNgaySinh);
         
         this.dispose();
         
@@ -255,7 +275,7 @@ public class FormNgay extends javax.swing.JFrame {
                 Integer.valueOf(cbbThang.getSelectedItem().toString())!=month &&
                 Integer.valueOf(cbbNam.getSelectedItem().toString())!=year){
                       strNgaySinh = cbbNam.getSelectedItem().toString() + "-" + cbbThang.getSelectedItem().toString() + "-" + cbbNgay.getSelectedItem().toString();
-        Manager.homePage.SetNgayLap(strNgaySinh);
+        Manager.frmTC.SetNgayLap(strNgaySinh);
            
         this.dispose();
         }   
@@ -270,7 +290,7 @@ public class FormNgay extends javax.swing.JFrame {
                 Integer.valueOf(cbbThang.getSelectedItem().toString())!=month &&
                 Integer.valueOf(cbbNam.getSelectedItem().toString())!=year){
                       strNgaySinh = cbbNam.getSelectedItem().toString() + "-" + cbbThang.getSelectedItem().toString() + "-" + cbbNgay.getSelectedItem().toString();
-        Manager.homePage.SetNgayLap(strNgaySinh);
+        Manager.frmTC.SetNgayLap(strNgaySinh);
            
         this.dispose();
         }   
@@ -297,20 +317,20 @@ public class FormNgay extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormNgay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmNgay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormNgay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmNgay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormNgay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmNgay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormNgay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmNgay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormNgay().setVisible(true);
+                new frmNgay().setVisible(true);
             }
         });
     }

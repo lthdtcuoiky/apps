@@ -1,4 +1,4 @@
-package view.user;
+package quanlysp.view.user;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;

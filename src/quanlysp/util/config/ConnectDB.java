@@ -1,4 +1,4 @@
-package util.config;
+package quanlysp.util.config;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
