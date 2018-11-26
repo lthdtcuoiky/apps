@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 26, 2018 lúc 04:40 AM
+-- Thời gian đã tạo: Th10 26, 2018 lúc 10:10 AM
 -- Phiên bản máy phục vụ: 10.1.36-MariaDB
 -- Phiên bản PHP: 7.2.11
 
@@ -117,7 +117,11 @@ INSERT INTO `hoadon` (`MaHoaDon`, `MaNhanVien`, `NgayLapHoaDon`, `TongTien`, `Gh
 (42, 1, NULL, '0', '', NULL),
 (43, 1, NULL, '0', '', NULL),
 (44, 1, NULL, '0', '', NULL),
-(45, 1, NULL, '0', 'dsdsd', NULL);
+(45, 1, NULL, '0', 'dsdsd', NULL),
+(48, 1, '2018-11-26', '0', 'dsdsds', 1),
+(49, 1, NULL, '0', '', 1),
+(50, 1, NULL, '0', '', 1),
+(51, 1, NULL, '0', '', 1);
 
 -- --------------------------------------------------------
 
@@ -267,12 +271,10 @@ CREATE TABLE `quyen` (
 --
 
 INSERT INTO `quyen` (`MaQuyen`, `TenQuyen`, `ChuThich`) VALUES
-(1, 'Quản Trị Viên', NULL),
-(2, 'Kế Toán', NULL),
-(3, 'Thu Ngân', NULL),
-(4, 'Bảo Vệ', NULL),
-(5, 'New', NULL),
-(6, 'Giám Đốc', NULL);
+(1, 'admin', 'quản lý'),
+(2, 'user', 'người dùng'),
+(3, 'admin', 'giám đốc'),
+(4, 'admin', 'trưởng quầy');
 
 -- --------------------------------------------------------
 
@@ -308,9 +310,7 @@ INSERT INTO `sanpham` (`MaSanPham`, `TenSanPham`, `HangSanXuat`, `GiaNhap`, `Gia
 --
 
 CREATE TABLE `users` (
-  `ID` int(11) NOT NULL,
-  `MaNhanVien` int(11) DEFAULT NULL,
-  `TenDangNhap` varchar(50) DEFAULT NULL,
+  `TenDangNhap` varchar(50) NOT NULL,
   `Password` varchar(50) DEFAULT NULL,
   `Quyen` int(11) DEFAULT NULL,
   `ChuThich` varchar(255) CHARACTER SET utf8 DEFAULT NULL
@@ -320,9 +320,13 @@ CREATE TABLE `users` (
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`ID`, `MaNhanVien`, `TenDangNhap`, `Password`, `Quyen`, `ChuThich`) VALUES
-(1, 1, 'admin', 'admin', 1, 'Nguoi thẩm quyền'),
-(2, 3, 'tuananh', '1999', 2, 'Người thẩm quyền');
+INSERT INTO `users` (`TenDangNhap`, `Password`, `Quyen`, `ChuThich`) VALUES
+('admin', 'admin', 1, 'Nguoi thẩm quyền'),
+('duynguyen123', 'duynguyen99', 2, 'người dùng'),
+('duynguyen1234', 'duynguyen1234', 2, 'người dùng'),
+('duynguyen8', 'duynguyen8', 2, 'người dùng'),
+('duynguyen991', 'duynguyen99', 2, 'người dùng'),
+('vanduy123', 'vanduy123', 2, 'người dùng');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -402,7 +406,8 @@ ALTER TABLE `sanpham`
 -- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`TenDangNhap`),
+  ADD KEY `fk_quyendangnhap` (`Quyen`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
@@ -418,7 +423,7 @@ ALTER TABLE `hangsanxuat`
 -- AUTO_INCREMENT cho bảng `hoadon`
 --
 ALTER TABLE `hoadon`
-  MODIFY `MaHoaDon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `MaHoaDon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT cho bảng `khachhang`
@@ -463,12 +468,6 @@ ALTER TABLE `sanpham`
   MODIFY `MaSanPham` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT cho bảng `users`
---
-ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- Các ràng buộc cho các bảng đã đổ
 --
 
@@ -496,6 +495,12 @@ ALTER TABLE `nhanvien`
 --
 ALTER TABLE `sanpham`
   ADD CONSTRAINT `fk_loaisanpham` FOREIGN KEY (`MaLoaiSanPham`) REFERENCES `loaisanpham` (`MaLoaiSanPham`);
+
+--
+-- Các ràng buộc cho bảng `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `fk_quyendangnhap` FOREIGN KEY (`Quyen`) REFERENCES `quyen` (`MaQuyen`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
