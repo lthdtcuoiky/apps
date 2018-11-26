@@ -1,6 +1,7 @@
 package quanlysp.view.admin;
 
 import quanlysp.controlller.Manager;
+import quanlysp.model.bo.EventLayDLHoaDon;
 import quanlysp.view.admin.ViewDangNhap;
 
 import view.admin.displayvalueModel;
@@ -414,14 +415,7 @@ public class ViewTrangChu extends JFrame {
             }
         });
 
-        lblNgayLap.setText("Ngày Lập");
-        lblNgayLap.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblNgayLapMouseClicked(evt);
-            }
-        });
 
-        txtNgayLapHoaDon_HoaDon.setEditable(false);
 
         //
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
@@ -511,7 +505,19 @@ public class ViewTrangChu extends JFrame {
 
         lblMaHoaDon.setText("Mã Hóa Đơn");
 
+        lblNgayLap.setText("Ngày Lập");
+        lblNgayLap.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblNgayLapMouseClicked(evt);
+            }
+        });
+
+        txtNgayLapHoaDon_HoaDon.setEditable(true);
+
+
         jLabel40.setText("Sản Phẩm");
+
+
 
         //
         javax.swing.GroupLayout jPanelHoaDonLayout = new javax.swing.GroupLayout(jPanelHoaDon);
@@ -2224,43 +2230,8 @@ public class ViewTrangChu extends JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDiaChi_NhanVienActionPerformed
 
-    private void btnXoa_PhieuNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa_PhieuNhapActionPerformed
 
-        if (!txtMaPhieuNhap_PhieuNhap.getText().equals("")) {
-            String MaPhieuNhap = txtMaPhieuNhap_PhieuNhap.getText();
-            String cautruyvan = "delete PhieuNhap where MaPhieuNhap=" + MaPhieuNhap;
-            String ctvKiemThu = "select count(MaCTPN) as SoChiTietPhieuMua"
-                    + " from PhieuNhap,ChiTietPhieuNhap where PhieuNhap.MaPhieuNhap=ChiTietPhieuNhap.MaPhieuNhap and "
-                    + "PhieuNhap.MaPhieuNhap= " + MaPhieuNhap;
-            ResultSet rs1 = Manager.connection.excuteQuerySelect(ctvKiemThu);
-            System.out.println(ctvKiemThu);
-            int so1 = 0;
-            try {
-                if (rs1.next()) {
-                    so1 = rs1.getInt("SoChiTietPhieuMua");
-                    if (rs1.getInt("SoChiTietPhieuMua") == 0) {
-                        Manager.connection.excuteQueryUpdate(cautruyvan);
-                        System.out.println("đã xóa");
-                        LayDuLieuPhieuNhap();
-                    } else {
-                        ThongBao("không thể xóa bởi Phiếu nhập đã có " + so1 + " chi tiết Phiếu nhập!", "báo lỗi", 2);
-                    }
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(ViewTrangChu.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-            ThongBao("bạn chưa chọn Phiếu nhập để xóa", "xóa bằng niềm tin à!khi không biết xóa cái nào", 2);
-        }
-    }//GEN-LAST:event_btnXoa_PhieuNhapActionPerformed
 
-    private void txtSoLuongCTPN_PhieuNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSoLuongCTPN_PhieuNhapActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSoLuongCTPN_PhieuNhapActionPerformed
-
-    private void btnXoaXTPN_PhieuNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaXTPN_PhieuNhapActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnXoaXTPN_PhieuNhapActionPerformed
 
     private void jPanelDangXuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelDangXuatMouseClicked
 
@@ -2280,7 +2251,7 @@ public class ViewTrangChu extends JFrame {
     }//GEN-LAST:event_jPanelNhanVienComponentShown
 
     private void jPanelSanPhamComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelSanPhamComponentShown
-        LayDuLieuSanPham("1");
+        LayDuLieuSanPham();
         rbtnTimKiemTenSanPham_SanPham.setSelected(true);
         cbbMaLoaiSanPham_SanPham.setModel(LayDuLieucbb("LoaiSanPham", "TenLoaiSanPham", "MaLoaiSanPham"));
         cbbHangSanXuat_SanPham.setModel(LayDuLieucbb("HangSanXuat", "TenHangSanXuat", "MaHangSanXuat"));
@@ -2322,12 +2293,17 @@ public class ViewTrangChu extends JFrame {
         GiaBan = txtGiaBan_SanPham.getText();
         HangSanXuat = GetCbbSelected(cbbHangSanXuat_SanPham);
         TonKho = txtTonKho_SanPham.getText();
-        TrangThai = "1";
+
         ChuThich = txtChuThich_SanPham.getText();
         Image = txtImg_SanPham.getText();
-
-        String cautruyvan = "insert into SanPham "
-                + "values(N'" + MaLoaiSanPham + "'," + TenSanPham + "," + HangSanXuat + "," + GiaNhap + "," + GiaBan + "," + TonKho + "," + TrangThai + ",'" + Image + "',N'" + ChuThich + "')";
+//
+//        String cautruyvan = "insert into sanpham "
+//                + "values(N'" + TenSanPham + "' ,"  + HangSanXuat + ",'" + GiaNhap + "', '" + GiaBan + "', "
+//                + TonKho + ", '" + Image + "', N" + ChuThich + "'," + MaLoaiSanPham +")";
+//
+        String cautruyvan = "INSERT INTO sanpham(TenSanPham, HangSanXuat, GiaNhap, GiaBan, TonKho, Image, ChuThich, MaLoaiSanPham) "+
+                "VALUES (N'"+  TenSanPham +"', " +  HangSanXuat + ",'" + GiaNhap + "', '" + GiaBan + "'," +
+                TonKho + ", '" + Image + "', N'" + ChuThich + "', " + MaLoaiSanPham +")";
         System.out.println(cautruyvan);
         boolean kiemtra = KiemTraNhanSanPham(0);
         if (kiemtra) {
@@ -2336,27 +2312,27 @@ public class ViewTrangChu extends JFrame {
         } else {
             System.out.println("Thất Bại");
         }
-        LayDuLieuSanPham("1");
+        LayDuLieuSanPham();
     }//GEN-LAST:event_btnThem_SanPhamActionPerformed
 
     // btn sửa ch
     private void bntSua_SanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSua_SanPhamActionPerformed
-        String MaSanPham, TenSanPham, LoaiSanPham, GiaNhap, GiaBan, HangSanXuat, TonKho, TrangThai, Image, ChuThich;
+        String MaSanPham, TenSanPham, MaLoaiSanPham, GiaNhap, GiaBan, HangSanXuat, TonKho,  Image, ChuThich;
         MaSanPham = txtMaSanPham_SanPham.getText();
         TenSanPham = txtTenSanPham_SanPham.getText();
-        LoaiSanPham = GetCbbSelected(cbbMaLoaiSanPham_SanPham);
+        MaLoaiSanPham = GetCbbSelected(cbbMaLoaiSanPham_SanPham);
         GiaNhap = txtGiaNhap_SanPham.getText();
         GiaBan = txtGiaBan_SanPham.getText();
         HangSanXuat = GetCbbSelected(cbbHangSanXuat_SanPham);
         TonKho = txtTonKho_SanPham.getText();
-        TrangThai = "1";
+
         Image = txtImg_SanPham.getText();
 
         ChuThich = txtChuThich_SanPham.getText();
         String cautruyvan = "update  SanPham set "
-                + "TenSanPham =" + "N'" + TenSanPham + "',LoaiSanPham=" + LoaiSanPham + ",HangSanXuat="
+                + "TenSanPham =" + "N'" + TenSanPham + "',MaLoaiSanPham=" + MaLoaiSanPham + ",HangSanXuat="
                 + HangSanXuat + ",GiaNhap=" + GiaNhap + ",GiaBan=" + GiaBan + ",TonKho=" + TonKho
-                + ",TrangThai=" + TrangThai + ",Image='" + Image + "',ChuThich =N'" + ChuThich + "' where MaSanPham=" + MaSanPham;
+                 + ",Image='" + Image + "',ChuThich =N'" + ChuThich + "' where MaSanPham=" + MaSanPham;
         System.out.println(cautruyvan);
         boolean kiemtra = KiemTraNhanSanPham(1);
         if (kiemtra) {
@@ -2365,7 +2341,7 @@ public class ViewTrangChu extends JFrame {
         } else {
             System.out.println("Thất Bại");
         }
-        LayDuLieuSanPham("1");
+        LayDuLieuSanPham();
     }//GEN-LAST:event_bntSua_SanPhamActionPerformed
 
     private void btnReset_SanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReset_SanPhamActionPerformed
@@ -2410,19 +2386,6 @@ public class ViewTrangChu extends JFrame {
         cbbTimKiemLoaiKhachHang_KhachHang.setModel(LayDuLieucbb("LoaiKhachHang", "TenLoaiKhachHang", "MaLoaiKhachHang"));
     }//GEN-LAST:event_jPanel_KhachHangComponentShown
 
-    private void jPanelLoaiSanPhamComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelLoaiSanPhamComponentShown
-        layDuLieuLoaiSanPham();
-        System.out.println("vô sản Phẩm");
-
-    }//GEN-LAST:event_jPanelLoaiSanPhamComponentShown
-
-    private void jPanelLoaiSanPhamComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jPanelLoaiSanPhamComponentAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPanelLoaiSanPhamComponentAdded
-
-    private void tblLoaiSanPham_LoaiSanPhamComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_tblLoaiSanPham_LoaiSanPhamComponentShown
-
-    }//GEN-LAST:event_tblLoaiSanPham_LoaiSanPhamComponentShown
 
     private void btnThem_NhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem_NhanVienActionPerformed
         String MaNhanVien, TenNhanVien, NgaySinh, GioiTinh, NgayVaoLam, ChucVu, DiaChi, SoDT, GhiChu;
@@ -3013,7 +2976,7 @@ public class ViewTrangChu extends JFrame {
                 if (rs2.getInt("SoChiTietPhieuNhap") == 0 && so1 == 0) {
                     Manager.connection.excuteQueryUpdate(cautruyvan);
                     System.out.println("đã xóa");
-                    LayDuLieuSanPham("1");
+                    LayDuLieuSanPham();
                     return true;
                 } else {
                     ThongBao("không thể xóa bởi có trong " + so1 + "  Chi tiết hóa đơn hóa đơn \n và có trong "
@@ -3181,39 +3144,7 @@ public class ViewTrangChu extends JFrame {
         lblSDT_KhachHang.setForeground(Color.black);
     }//GEN-LAST:event_txtSDT_KhachHangFocusLost
 
-    private void btnSuaCTPN_PhieuNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaCTPN_PhieuNhapActionPerformed
-        String MaCTPN,MaPhieuNhap,MaSanPham,SoLuong,TongTien,ChuThich;
-        MaCTPN=txtMaCTPN_PhieuNhap.getText();
-        MaPhieuNhap=txtMaPhieuNhap_PhieuNhap.getText();
-        MaSanPham=GetCbbSelected(cbbSanPhamCTPN_PhieuNhap);
-        SoLuong=txtSoLuongCTPN_PhieuNhap.getText();
-        TongTien=txtTongTienCTPN_PhieuNhap.getText();
-        ChuThich=txtChuThichCTPN_PhieuNhap.getText();
 
-        String tb="", cautruyvan = "update  ChiTietPhieuNhap set "
-                + " "  + " MaSanPham= " + MaSanPham + " ,SoLuong=" + SoLuong
-                + ",TongTien=" + TongTien + ", ChuThich=N'" + ChuThich + "'where MaCTPN="+MaCTPN;
-        System.out.println(cautruyvan);
-        boolean kiemtra = true;
-        if(txtSoLuongCTPN_PhieuNhap.equals("")){
-            tb+="Chưa nhập Số lượng";
-            kiemtra=false;}
-        try {
-            int bien= Integer.valueOf(txtSoLuongCTPN_PhieuNhap.getText());
-
-        } catch (Exception e) {
-            kiemtra=false;
-            tb+="Số lượng phải nhập bằng số";
-        }
-        if (!txtMaPhieuNhap_CTPN.equals("") && kiemtra==true) {
-
-            Manager.connection.excuteQueryUpdate(cautruyvan);
-            System.out.println("Đã sửa Thành Công");
-        } else {
-            ThongBao("Không thể Thêm ", "lỗi", 2);
-        }
-        LayDuLieuChiTietPhieuNhap(txtMaPhieuNhap_CTPN.getText());
-    }//GEN-LAST:event_btnSuaCTPN_PhieuNhapActionPerformed
 
     private void jPanelHoaDonComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelHoaDonComponentShown
         LayDuLieuHoaDon();
@@ -3311,7 +3242,7 @@ public class ViewTrangChu extends JFrame {
         txtGhiChu_HoaDon.setText(tblHoaDon_HoaDon.getValueAt(viTriDongVuaBam, 6).toString());
         setSelectedCombobox(tblHoaDon_HoaDon.getValueAt(viTriDongVuaBam, 3).toString(), cbbNhanVien_HoaDon);
         setSelectedCombobox(tblHoaDon_HoaDon.getValueAt(viTriDongVuaBam, 2).toString(), cbbKhachHang_HoaDon);
-        LayDuLieuChiTietHoaDon(txtMaPhieuMua_HoaDon.getText());
+        //LayDuLieuChiTietHoaDon(txtMaPhieuMua_HoaDon.getText());
         if (tblCTHoaDon_ChiTietHoaDon.getRowCount() > 0) {
             cbbSanPham_ChiTietHoaDon.setModel(LayDuLieucbb("SanPham", "TenSanPham", "MaSanPham"));
             txtMaCTH_ChiTietHoaDon.setText(tblCTHoaDon_ChiTietHoaDon.getValueAt(0, 1).toString());
@@ -3326,17 +3257,6 @@ public class ViewTrangChu extends JFrame {
         }
     }//GEN-LAST:event_tblHoaDon_HoaDonMouseClicked
 
-    private void cbbSanPham_ChiTietHoaDonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbbSanPham_ChiTietHoaDonItemStateChanged
-        int SoLuong = 0;
-        double Tien = 0;
-        try {
-            SoLuong = Integer.valueOf(txtSoLuong_ChiTietHoaDon.getText());
-        } catch (Exception e) {
-        }
-        int Gia = GetGiaSanPham(GetCbbSelected(cbbSanPham_ChiTietHoaDon));
-        Tien = (double) Gia * SoLuong;
-        txtTongTien_ChiTietHoaDon.setText(String.valueOf(Tien));
-    }//GEN-LAST:event_cbbSanPham_ChiTietHoaDonItemStateChanged
 
 
 
@@ -3572,10 +3492,14 @@ public class ViewTrangChu extends JFrame {
     }
 
 
+
+
+
+
     public void LayDuLieuHoaDon() {
         String cautruyvan = "";
-        cautruyvan = "select MaHoaDon,KhachHang.TenKhachHang as TenKhachHang,NhanVien.TenNhanVien,TongTien,NgayLapHoaDon,HoaDon.GhiChu from hoadon,khachhang,nhanvien where hoadon.MaKhachHang =khachhang.MaKhachHang "
-                + "and hoadon.MaNhanVien=nhanvien.MaNhanVien ";
+        cautruyvan = "select MaHoaDon,KhachHang.TenKhachHang as TenKhachHang,NhanVien.TenNhanVien,TongTien,NgayLapHoaDon,HoaDon.GhiChu " +
+                "from hoadon,khachhang,nhanvien where hoadon.MaKhachHang =khachhang.MaKhachHang and hoadon.MaNhanVien=nhanvien.MaNhanVien ";
         ResultSet rs = Manager.connection.excuteQuerySelect(cautruyvan);
         Object[] obj = new Object[]{"STT", "Mã hóa đơn", "Khách Hàng ", "Nhân viên", "Ngày lập hóa dơn", "tổng tiền", "Chú Thích"};
         DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
@@ -3599,95 +3523,20 @@ public class ViewTrangChu extends JFrame {
         }
     }
 
-    public void LayDuLieuChiTietHoaDon(String MaHoaDon) {
-        String cautruyvan = "";
-        cautruyvan = "select MaCTHD,MaHoaDon,SanPham.TenSanPham,SoLuong,TongTien,ChiTietHoaDon.GhiChu "
-                + " from ChiTietHoaDon,SanPham where ChiTietHoaDon.MaSanPham=SanPham.MaSanPham  and MaHoaDon=" + MaHoaDon;
-        ResultSet rs = Manager.connection.excuteQuerySelect(cautruyvan);
-        Object[] obj = new Object[]{"STT", "Mã CTHD", "Mã Hóa Đơn", "Sản Phẩm", "Số Lượng", "tổng tiền", "Chú Thích"};
-        DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
-        tblCTHoaDon_ChiTietHoaDon.setModel(tableModel);
-        int c = 0;
-        try {
-            while (rs.next()) {
-                c++;
-                Object[] item = new Object[7];
-                item[0] = c;
-                item[1] = rs.getInt("MaCTHD");
-                item[2] = rs.getString("MaHoaDon");
-                item[3] = rs.getString("TenSanPham");
-                item[4] = rs.getString("SoLuong");
-                item[5] = rs.getDouble("TongTien");
-                item[6] = rs.getString("GhiChu");
-                tableModel.addRow(item);
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.toString());
-        }
-    }
 
-    public void LayDuLieuPhieuNhap() {
-        String cautruyvan = "";
-        cautruyvan = "select MaPhieuNhap,NhanVien.TenNhanVien,NhaPhanPhoi.TenNhaPhanPhoi,TongTien,NgayNhap,PhieuNhap.ChuThich"
-                + " from PhieuNhap,NhanVien,NhaPhanPhoi where PhieuNhap.MaNhanVien =NhanVien.MaNhanVien and PhieuNhap.MaNhaPhanPhoi=NhaPhanPhoi.MaNhaPhanPhoi ";
-        ResultSet rs = Manager.connection.excuteQuerySelect(cautruyvan);
-        Object[] obj = new Object[]{"STT", "Mã Phiếu Nhập", "Nhân Viên Nhập", "Tên Nhà Phân phối", "Thành tiền", "Ngày lập", "Chú Thích"};
-        DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
-        tblPhieuNhap_PhieuNhap.setModel(tableModel);
-        int c = 0;
-        try {
-            while (rs.next()) {
-                Object[] item = new Object[7];
-                c++;
-                item[0] = c;
-                item[1] = rs.getInt("MaPhieuNhap");
-                item[2] = rs.getString("TenNhanVien");
-                item[3] = rs.getString("TenNhaPhanPhoi");
-                item[4] = rs.getString("TongTien");
-                item[5] = rs.getString("NgayNhap");
-                item[6] = rs.getString("ChuThich");
-                tableModel.addRow(item);
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.toString());
-        }
-    }
 
-    public void LayDuLieuChiTietPhieuNhap(String MaPhieuNhap) {
-        String cautruyvan = "";
-        cautruyvan = "select MaCTPN,ChiTietPhieuNhap.MaPhieuNhap ,SanPham.TenSanPham,ChiTietPhieuNhap.SoLuong,"
-                + "ChiTietPhieuNhap.TongTien,ChiTietPhieuNhap.ChuThich"
-                + " from PhieuNhap,ChiTietPhieuNhap,SanPham where "
-                + "PhieuNhap.MaPhieuNhap=ChiTietPhieuNhap.MaPhieuNhap and"
-                + " SanPham.MaSanPham=ChiTietPhieuNhap.MaSanPham and ChiTietPhieuNhap.MaphieuNhap=" + MaPhieuNhap;
-        ResultSet rs = Manager.connection.excuteQuerySelect(cautruyvan);
-        Object[] obj = new Object[]{"STT", "Mã CTPN", "Mã Phiếu Nhập", "Sản Phẩm", "Số Lượng", "Tổng Tiền", "Chú Thích"};
-        DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
-        //  tblChiTietPhieuNhap_PhieuNhap.setModel(tableModel);
-        int c = 0;
-        try {
-            while (rs.next()) {
-                Object[] item = new Object[7];
-                c++;
-                item[0] = c;
-                item[1] = rs.getInt("MaCTPN");
-                item[2] = rs.getInt("MaPhieuNhap");
-                item[3] = rs.getString("TenSanPham");
-                item[4] = rs.getString("Soluong");
-                item[5] = rs.getString("TongTien");
-                item[6] = rs.getString("ChuThich");
-                tableModel.addRow(item);
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.toString());
-        }
-    }
 
-    public void LayDuLieuSanPham(String TrangThai) {
+/*
+* select MaSanPham,SanPham.TenSanPham,SanPham.MaLoaiSanPham,GiaNhap,GiaBan,HangsanXuat.TenHangSanXuat as THSX,TonKho,LoaiSanPham.TenLoaiSanPham
+           as TenLoaiSanPham,Image,SanPham.ChuThich from SanPham,LoaiSanPham,HangSanXuat where
+                SanPham.MaLoaiSanPham=LoaiSanPham.MaLoaiSanPham and SanPham.HangSanXuat=HangSanXuat.MaHangSanXuat and TrangThai=1*/
+
+
+    public void LayDuLieuSanPham() {
         String cautruyvan = "";
         cautruyvan = "select MaSanPham,SanPham.TenSanPham,SanPham.MaLoaiSanPham,GiaNhap,GiaBan,HangsanXuat.TenHangSanXuat as THSX,TonKho,LoaiSanPham.TenLoaiSanPham"
                 + " as TenLoaiSanPham,Image,SanPham.ChuThich from SanPham,LoaiSanPham,HangSanXuat where "
-                + "SanPham.MaLoaiSanPham=LoaiSanPham.MaLoaiSanPham and SanPham.HangSanXuat=HangSanXuat.MaHangSanXuat and TrangThai=" + TrangThai;
+                + "SanPham.MaLoaiSanPham=LoaiSanPham.MaLoaiSanPham and SanPham.HangSanXuat=HangSanXuat.MaHangSanXuat ";
         ResultSet rs = Manager.connection.excuteQuerySelect(cautruyvan);
         Object[] obj = new Object[]{"STT", "Mã Sản Phẩm", "Tên sản phẩm", "Loại sản phẩm", "Giá nhập", "Giá bán", "Hãng sản Xuất", "Tồn kho", "ảnh", "Chú Thích"};
         DefaultTableModel tableModel = new DefaultTableModel(obj, 0);
@@ -4097,6 +3946,7 @@ public class ViewTrangChu extends JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ViewTrangChu().setVisible(true);
+
             }
         });
     }
@@ -4266,7 +4116,7 @@ public class ViewTrangChu extends JFrame {
     private javax.swing.JRadioButton rbtnTimKiemTenSanPham_SanPham;
     private javax.swing.JTable tblCTHoaDon_ChiTietHoaDon;
     private javax.swing.JTable tblChucVu_ChucVu;
-    private javax.swing.JTable tblHoaDon_HoaDon;
+    public javax.swing.JTable tblHoaDon_HoaDon;
     private javax.swing.JTable tblKhachHang_KhachHang;
     private javax.swing.JTable tblLoaiSanPham_LoaiSanPham;
     private javax.swing.JTable tblNhanVien_ChucVu;
