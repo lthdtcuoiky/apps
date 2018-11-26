@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.quanlysp.view;
+package view.admin;
 
 
-import com.quanlysp.managerquery.Manager;
 
-import javax.swing.text.View;
+import controlller.Manager;
 
 /**
  *
@@ -106,7 +105,7 @@ public class ViewAnSanPham extends javax.swing.JFrame {
 
     private void btnAnSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnSanPhamActionPerformed
       String MaSanPham,  TrangThai ;
-        MaSanPham = Manager.frmTC.GetMaSanPham();
+        MaSanPham = Manager.homePage.GetMaSanPham();
 
         TrangThai = "0";
 
@@ -115,23 +114,23 @@ public class ViewAnSanPham extends javax.swing.JFrame {
         System.out.println(cautruyvan);
         boolean kiemtra = true;
         if (kiemtra) {
-            Manager.connection.ExcuteQueryUpdateDB(cautruyvan);
+            Manager.connection.excuteQueryUpdate(cautruyvan);
             System.out.println("Đã Sửa Thành Công Sản Phẩm");
         } else {
-            Manager.frmTC.ThongBao("Không thể ", "Sửa Sản Phẩm", 2);
+            Manager.homePage.ThongBao("Không thể ", "Sửa Sản Phẩm", 2);
         }
-       // Manager.frmTC.LayDuLieuSanPham("1");
+       // Manager.homePage.LayDuLieuSanPham("1");
         this.dispose();
     }//GEN-LAST:event_btnAnSanPhamActionPerformed
 
     private void btnXoaSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSanPhamActionPerformed
 
-             if(! Manager.frmTC.GetMaSanPham().equals("")){
-        Manager.frmTC.XoaSanPham();
-       Manager.frmTC.ResSanPham();
+             if(! Manager.homePage.GetMaSanPham().equals("")){
+        Manager.homePage.XoaSanPham();
+       Manager.homePage.ResSanPham();
 }
 else
-     Manager.frmTC.ThongBao("bạn chưa nhập mã sản phẩm", "lỗi khi xóa",2);
+     Manager.homePage.ThongBao("bạn chưa nhập mã sản phẩm", "lỗi khi xóa",2);
     }//GEN-LAST:event_btnXoaSanPhamActionPerformed
 
     /**
