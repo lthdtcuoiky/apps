@@ -1,4 +1,4 @@
-package util.config;
+package quanlysp.util.config;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class ConnectDB {
-	private static String url = "jdbc:mysql://localhost:3306/app_ban_hang?seUnicode=true&characterEncoding=utf-8";
+	private static String url = "jdbc:mysql://localhost:3306/quanlysanpham";
 	private static String user = "root";
 	private static String password = "";
 	private static Connection connect = null;

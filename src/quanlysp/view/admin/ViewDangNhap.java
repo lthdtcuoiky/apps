@@ -1,9 +1,11 @@
-/*
+package quanlysp.view.admin;/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.admin;
+
+import quanlysp.controlller.Manager;
+import quanlysp.view.admin.ViewDangKy;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -29,7 +31,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import controlller.Manager;
+
 
 /**
  * @author Windows 10 Version 2
@@ -280,7 +282,7 @@ public class ViewDangNhap extends JFrame {
 		String strUsername = txtUserName.getText().trim();
 		String strPassword = String.valueOf(txtPassword.getPassword()).trim();
 
-		String sql = "SELECT * FROM app_ban_hang.tai_khoan WHERE username = '" + strUsername + "' AND password ='"
+		String sql = "SELECT * FROM quanlysanpham.users WHERE username = '" + strUsername + "' AND password ='"
 				+ strPassword + "'";
 		ResultSet rs = Manager.connection.excuteQuerySelect(sql);
 		String luumk = "", luutdn = "";
@@ -319,7 +321,7 @@ public class ViewDangNhap extends JFrame {
 
 	private boolean KiemTra(String username, String password) {
 		boolean result = false;
-		String sql = "SELECT * FROM app_ban_hang.tai_khoan WHERE username = '" + username + "' AND password ='"
+		String sql = "SELECT * FROM users WHERE Username = '" + username + "' AND Password ='"
 				+ password + "'";
 		System.out.println(sql);
 		ResultSet rs = Manager.connection.excuteQuerySelect(sql);

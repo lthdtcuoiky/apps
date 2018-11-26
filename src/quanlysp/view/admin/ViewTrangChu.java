@@ -1,4 +1,10 @@
-package view.admin;
+package quanlysp.view.admin;
+
+import quanlysp.controlller.Manager;
+import quanlysp.view.admin.ViewDangNhap;
+
+import view.admin.displayvalueModel;
+
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -29,13 +35,9 @@ import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableModel;
 
-import controlller.Manager;
 
 
-/**
- *
- * @author huy
- */
+
 public class ViewTrangChu extends JFrame {
 
     /**
@@ -547,7 +549,7 @@ public class ViewTrangChu extends JFrame {
 
         jTabbedPaneHoaDon.addTab("Phiếu Mua Hàng", jPanelHoaDon);
 
-        tbljpanel.addTab("Hóa Dơn", new ImageIcon("C:\\Users\\duy\\eclipse-workspace\\team.lthdt2018.app.java\\src\\quanlysp\\util\\images\\hoadon.png"), jTabbedPaneHoaDon); // NOI18N
+        tbljpanel.addTab("Hóa Dơn", new ImageIcon("src\\quanlysp\\util\\images\\hoadon.png"), jTabbedPaneHoaDon); // NOI18N
 
 
         //
@@ -931,7 +933,7 @@ public class ViewTrangChu extends JFrame {
 
 
         // ảnh sản phẩm
-        tbljpanel.addTab(" Sản Phẩm", new ImageIcon("C:\\Users\\duy\\eclipse-workspace\\team.lthdt2018.app.java\\src\\quanlysp\\util\\images\\sanpham.png"), jTabbedPaneQuanLySanPham); // NOI18N
+        tbljpanel.addTab(" Sản Phẩm", new ImageIcon("src\\quanlysp\\util\\images\\sanpham.png"), jTabbedPaneQuanLySanPham); // NOI18N
 
         jPanel_KhachHang.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -1287,7 +1289,7 @@ public class ViewTrangChu extends JFrame {
                                         .addGap(22, 22, 22)))
         );
 
-        tbljpanel.addTab("Khách Hàng", new ImageIcon("C:\\Users\\duy\\eclipse-workspace\\team.lthdt2018.app.java\\src\\quanlysp\\util\\images\\khachHang.png"), jPanel_KhachHang); // NOI18N
+        tbljpanel.addTab("Khách Hàng", new ImageIcon("src\\quanlysp\\util\\images\\khachHang.png"), jPanel_KhachHang); // NOI18N
 
         jTabbedPaneNhanVien.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -2039,7 +2041,7 @@ public class ViewTrangChu extends JFrame {
 
 
 
-        tbljpanel.addTab("Nhân Viên", new ImageIcon("C:\\Users\\duy\\eclipse-workspace\\team.lthdt2018.app.java\\src\\quanlysp\\util\\images\\nhanvien.png"), jTabbedPaneNhanVien); // NOI18N
+        tbljpanel.addTab("Nhân Viên", new ImageIcon("src\\quanlysp\\util\\images\\nhanvien.png"), jTabbedPaneNhanVien); // NOI18N
 
 
 
@@ -2082,7 +2084,7 @@ public class ViewTrangChu extends JFrame {
                         .addGap(0, 584, Short.MAX_VALUE)
         );
 
-        tbljpanel.addTab("đăng Xuất", new ImageIcon("C:\\Users\\duy\\eclipse-workspace\\team.lthdt2018.app.java\\src\\quanlysp\\util\\images\\thoat.png"), jPanelDangXuat); // NOI18N
+        tbljpanel.addTab("đăng Xuất", new ImageIcon("src\\quanlysp\\util\\images\\thoat.png"), jPanelDangXuat); // NOI18N
 
         jPanelMe.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -2118,7 +2120,7 @@ public class ViewTrangChu extends JFrame {
                                 .addContainerGap())
         );
 
-        tbljpanel.addTab("About Me", new ImageIcon("C:\\Users\\duy\\eclipse-workspace\\team.lthdt2018.app.java\\src\\quanlysp\\util\\images\\me.png"), jPanelMe); // NOI18N
+        tbljpanel.addTab("About Me", new ImageIcon("src\\quanlysp\\util\\images\\me.png"), jPanelMe); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -2990,8 +2992,7 @@ public class ViewTrangChu extends JFrame {
     public boolean XoaSanPham() {
         String MaSanPham = txtMaSanPham_SanPham.getText();
         String cautruyvan = "delete SanPham where MaSanPham=" + MaSanPham;
-        String ctvKiemThu = "select count(MaCTHD) as SoChiTietHoaDon"
-                + " from SanPham,ChiTietHoaDon where SanPham.MaSanPham=ChiTietHoaDon.MaSanPham and SanPham.MaSanPham=" + MaSanPham;
+        String ctvKiemThu = "select * from SanPham  where   SanPham.MaSanPham=" + MaSanPham;
         ResultSet rs1 = Manager.connection.excuteQuerySelect(ctvKiemThu);
         String ctvKiemThu2 = "select count(MaCTPN) as SoChiTietPhieuNhap"
                 + " from SanPham,ChiTietPhieuNhap where SanPham.MaSanPham=ChiTietPhieuNhap.MaSanPham and SanPham.MaSanPham=" + MaSanPham;
@@ -3262,26 +3263,16 @@ public class ViewTrangChu extends JFrame {
     private void btnXoa_HoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa_HoaDonActionPerformed
         if (!txtMaPhieuMua_HoaDon.getText().equals("")) {
             String MaHoaDon = txtMaPhieuMua_HoaDon.getText();
-            String cautruyvan = "delete HoaDon where MaHoaDon=" + MaHoaDon;
-            String ctvKiemThu = "select count(MaCTHD) as SoChiTietPhieuMua"
-                    + " from HoaDon,ChiTietHoaDon where HoaDon.MaHoaDon=ChiTietHoaDon.MaHoaDon and HoaDon.MaHoaDon=" + MaHoaDon;
-            ResultSet rs1 = Manager.connection.excuteQuerySelect(ctvKiemThu);
-            System.out.println(ctvKiemThu);
-            int so1 = 0;
-            try {
-                if (rs1.next()) {
-                    so1 = rs1.getInt("SoChiTietPhieuMua");
-                    if (rs1.getInt("SoChiTietPhieuMua") == 0) {
+            String cautruyvan = "DELETE FROM hoadon WHERE MaHoaDon=" + MaHoaDon;
+            //String ctvKiemThu = "select * from HoaDon HoaDon.MaHoaDon=" + MaHoaDon;
+          //  ResultSet rs1 = Manager.connection.excuteQuerySelect(cautruyvan);
+           // System.out.println(ctvKiemThu);
+
                         Manager.connection.excuteQueryUpdate(cautruyvan);
                         System.out.println("đã xóa");
                         LayDuLieuHoaDon();
-                    } else {
-                        ThongBao("không thể xóa bởi hóa đơn đã có " + so1 + " chi tiết hóa đơn!", "báo lỗi", 2);
-                    }
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(ViewTrangChu.class.getName()).log(Level.SEVERE, null, ex);
-            }
+
+
         } else {
             ThongBao("bạn chưa chọn hóa đơn để xóa", "xóa bằng niềm tin à!khi không biết xóa cái nào", 2);
         }
@@ -3694,9 +3685,9 @@ public class ViewTrangChu extends JFrame {
 
     public void LayDuLieuSanPham(String TrangThai) {
         String cautruyvan = "";
-        cautruyvan = "select MaSanPham,SanPham.TenSanPham,SanPham.LoaiSanPham,GiaNhap,GiaBan,HangsanXuat.TenHangSanXuat as THSX,TonKho,LoaiSanPham.TenLoaiSanPham"
+        cautruyvan = "select MaSanPham,SanPham.TenSanPham,SanPham.MaLoaiSanPham,GiaNhap,GiaBan,HangsanXuat.TenHangSanXuat as THSX,TonKho,LoaiSanPham.TenLoaiSanPham"
                 + " as TenLoaiSanPham,Image,SanPham.ChuThich from SanPham,LoaiSanPham,HangSanXuat where "
-                + "SanPham.LoaiSanPham=LoaiSanPham.MaLoaiSanPham and SanPham.HangSanXuat=HangSanXuat.MaHangSanXuat and TrangThai=" + TrangThai;
+                + "SanPham.MaLoaiSanPham=LoaiSanPham.MaLoaiSanPham and SanPham.HangSanXuat=HangSanXuat.MaHangSanXuat and TrangThai=" + TrangThai;
         ResultSet rs = Manager.connection.excuteQuerySelect(cautruyvan);
         Object[] obj = new Object[]{"STT", "Mã Sản Phẩm", "Tên sản phẩm", "Loại sản phẩm", "Giá nhập", "Giá bán", "Hãng sản Xuất", "Tồn kho", "ảnh", "Chú Thích"};
         DefaultTableModel tableModel = new DefaultTableModel(obj, 0);

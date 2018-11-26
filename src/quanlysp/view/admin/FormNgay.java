@@ -1,16 +1,18 @@
-/*
+package quanlysp.view.admin;/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.admin;
+
+import quanlysp.controlller.Manager;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.DefaultComboBoxModel;
 
-import controlller.Manager;
+
 
 
 

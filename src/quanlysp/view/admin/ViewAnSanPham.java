@@ -6,8 +6,7 @@
 package view.admin;
 
 
-
-import controlller.Manager;
+import quanlysp.controlller.Manager;
 
 /**
  *

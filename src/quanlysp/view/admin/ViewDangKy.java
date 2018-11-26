@@ -1,9 +1,9 @@
-/*
+package quanlysp.view.admin;/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.admin;
+
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,7 +22,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import controlller.Manager;
+import quanlysp.controlller.Manager;
+
 
 /**
  *

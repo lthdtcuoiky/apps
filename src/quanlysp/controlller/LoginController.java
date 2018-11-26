@@ -1,10 +1,12 @@
-package controlller;
+package quanlysp.controlller;
 
 import model.bo.LoginBO;
 import model.dao.LoginDAO;
-import view.admin.ViewDangNhap;
+import quanlysp.view.admin.ViewDangNhap;
+
 
 public class LoginController {
+	// Duy mặt lòn
 	private LoginDAO loginDAO;
 	private LoginBO loginBO;
 	private ViewDangNhap loginView;

@@ -1,21 +1,22 @@
-/*
+package quanlysp.view.admin;/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.admin;
+
 
 
 
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.DefaultComboBoxModel;
 
-import controlller.Manager;
+import quanlysp.controlller.Manager;
 
 /**
  *
@@ -347,7 +348,7 @@ public class frmKhachHang extends javax.swing.JFrame {
         lblSDT_KhachHang.setForeground(Color.black);
     }//GEN-LAST:event_txtSDTFocusLost
 
-    private void btnThem_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem_ActionPerformed
+    private void btnThem_ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnThem_ActionPerformed
         String MaKhachHang, TenKhachHang, NgaySinh, GioiTinh, DiaChi, SDT, LoaiKhachHang, ChuThich;
         MaKhachHang = txtMaKhachHang.getText();
         TenKhachHang = txtTenKhachHang.getText();
